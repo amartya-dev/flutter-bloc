@@ -45,11 +45,10 @@ class UserRepository {
     prefs.clear();
   }
 
-  Future <bool> hasToken({
-    @required String username
-  }) async {
-    bool userExists = await userDao.checkUser(username);
-    if (userExists){
+  Future <bool> hasToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    String username = prefs.getString("username");
+    if (username != null){
       return true;
     }
     return false;

@@ -31,29 +31,57 @@ class _LoginFormState extends State<LoginForm> {
       },
       child: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
-          return Form(
-            child: Column(
-              children: <Widget>[
-                TextFormField(
-                  decoration: InputDecoration(labelText: 'username'),
-                  controller: _usernameController,
+          return Container(
+            child: Form(
+              child: Padding(
+                padding: EdgeInsets.all(40.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    TextFormField(
+                      decoration: InputDecoration(
+                          labelText: 'username', icon: Icon(Icons.person)),
+                      controller: _usernameController,
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                          labelText: 'password', icon: Icon(Icons.security)),
+                      controller: _passwordController,
+                      obscureText: true,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.85,
+                      height: MediaQuery.of(context).size.width * 0.22,
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 30.0),
+                        child: RaisedButton(
+                          onPressed: state is! LoginLoading
+                              ? _onLoginButtonPressed
+                              : null,
+                          child: Text(
+                            'Login',
+                            style: TextStyle(
+                              fontSize: 24.0,
+                            ),
+                          ),
+                          shape: StadiumBorder(
+                            side: BorderSide(
+                              color: Colors.black,
+                              width: 2,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      child: state is LoginLoading
+                          ? CircularProgressIndicator()
+                          : null,
+                    ),
+                  ],
                 ),
-                TextFormField(
-                  decoration: InputDecoration(labelText: 'password'),
-                  controller: _passwordController,
-                  obscureText: true,
-                ),
-                RaisedButton(
-                  onPressed:
-                      state is! LoginLoading ? _onLoginButtonPressed : null,
-                  child: Text('Login'),
-                ),
-                Container(
-                  child: state is LoginLoading
-                      ? CircularProgressIndicator()
-                      : null,
-                ),
-              ],
+              ),
             ),
           );
         },

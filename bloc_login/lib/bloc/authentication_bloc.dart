@@ -25,10 +25,8 @@ class AuthenticationBloc
     AuthenticationEvent event,
   ) async* {
     if (event is AppStarted) {
-      final prefs = await SharedPreferences.getInstance();
-      String username = prefs.getString("username");
 
-      final bool hasToken = await userRepository.hasToken(username: username);
+      final bool hasToken = await userRepository.hasToken();
 
       if (hasToken) {
         yield AuthenticationAuthenticated();
