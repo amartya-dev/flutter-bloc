@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:bloc_login/repository/user_repository.dart';
+import 'package:bloc_login/model/user_model.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';
@@ -37,24 +37,17 @@ class AuthenticationBloc
 
     if (event is LoggedIn) {
       yield AuthenticationLoading();
-      final prefs = await SharedPreferences.getInstance();
-
-      String username = prefs.getString("username");
 
       await userRepository.persistToken(
-        username: username,
-        token: event.token,
+        user: event.user
       );
       yield AuthenticationAuthenticated();
     }
 
     if (event is LoggedOut) {
       yield AuthenticationLoading();
-      final prefs = await SharedPreferences.getInstance();
 
-      String username = prefs.getString("username");
-
-      await userRepository.delteToken(username: username);
+      await userRepository.delteToken(id: 0);
 
       yield AuthenticationUnauthenticated();
     }
