@@ -1,6 +1,6 @@
 # image_picker_bloc
 
-Image upload feature using [bloc library](bloclibrary.dev)
+Image upload feature using [bloc library](https://bloclibrary.dev/#/)
 
 ## Getting Started
 
