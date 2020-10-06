@@ -3,6 +3,7 @@
 The following is a set of guidelines for contributing to flutter-bloc. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
  - Be sure you are looking to add something of substance to this project, not just spam PRs. PRs must meet the Hacktoberfest Quality Standards
  - Please be available to make changes within 48 hours when requested to do so. If you don’t, then your PR may be closed.
+ - Be sure to add flutter-bloc related work in this repository.
 
 ### How Can I Contribute?  
   * Reporting Bugs
