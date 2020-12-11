@@ -12,13 +12,14 @@ part 'authentication_state.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-  final UserRepository userRepository;
 
   AuthenticationBloc({@required this.userRepository})
-      : assert(UserRepository != null);
+      : assert(UserRepository != null),
+        super(AuthenticationUnauthenticated())
+  ;
 
-  @override
-  AuthenticationState get initialState => AuthenticationUnintialized();
+  final UserRepository userRepository;
+
 
   @override
   Stream<AuthenticationState> mapEventToState(
@@ -47,7 +48,7 @@ class AuthenticationBloc
     if (event is LoggedOut) {
       yield AuthenticationLoading();
 
-      await userRepository.delteToken(id: 0);
+      await userRepository.deleteToken(id: 0);
 
       yield AuthenticationUnauthenticated();
     }

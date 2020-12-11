@@ -13,8 +13,8 @@ class UserRepository {
     @required String password,
   }) async {
     UserLogin userLogin = UserLogin(
-      username: username,
-      password: password
+        username: username,
+        password: password
     );
     Token token = await getToken(userLogin);
     User user = User(
@@ -27,12 +27,12 @@ class UserRepository {
 
   Future<void> persistToken ({
     @required User user
-    }) async {
+  }) async {
     // write token with the user to the database
-      await userDao.createUser(user);
+    await userDao.createUser(user);
   }
 
-  Future <void> delteToken({
+  Future <void> deleteToken({
     @required int id
   }) async {
     await userDao.deleteUser(id);
